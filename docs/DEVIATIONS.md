@@ -1,10 +1,10 @@
 # Nhật ký thay đổi so với đề cương (deviations log)
 
-Mọi thay đổi sau tag `prereg-v1` ghi tại đây: ngày, thay đổi gì, vì sao, ảnh hưởng đến kết luận.
+Mọi thay đổi sau tag `prereg-v2` ghi tại đây: ngày, thay đổi gì, vì sao, ảnh hưởng đến kết luận.
 
-## Chỉnh sửa trước khi commit và tag prereg-v1 (sau lần tải pilot)
+## Sửa đổi từ v1 sang v2 (sau lần tải pilot, trước tag prereg-v2)
 
-Các chỉnh sửa dưới đây được làm **sau lần tải pilot 2026-10-21 08:28 UTC** và **trước commit đầu / tag `prereg-v1`**. Căn cứ chỉ là cấu trúc dữ liệu (số dòng, tiêu đề, ngày cập nhật), chưa có phân tích chất lượng nào.
+Bản v1 (`prereg-v1`, commit `ff52514`, 08:15 UTC) có 8 feed và các định nghĩa ban đầu, được tạo **trước** lần tải pilot. Các sửa đổi dưới đây được làm **sau lần tải pilot 2026-10-21 08:28 UTC** và **trước tag `prereg-v2`**. Căn cứ chỉ là cấu trúc dữ liệu (số dòng, tiêu đề, ngày cập nhật), chưa có phân tích chất lượng nào.
 
 | Ngày | Thay đổi | Lý do | Ảnh hưởng |
 |------|----------|-------|-----------|
@@ -14,7 +14,7 @@ Các chỉnh sửa dưới đây được làm **sau lần tải pilot 2026-10-2
 | 2026-10-21 | Tách thời gian nằm trong feed và thời gian còn hoạt động; H3b chuyển thành khám phá | Feed dạng cửa sổ trượt/giới hạn trên (URLhaus, ThreatFox, MalwareBazaar, OpenPhish, CINS) | Không kết luận chính sách TTL tối ưu |
 | 2026-10-21 | Định nghĩa lại T chỉ trên IoC xuất hiện ở ≥ 2 feed | Nhiều feed không có dấu thời gian nguồn | Một số feed ghi "không đủ dữ liệu" cho T |
 
-## Sau tag prereg-v1
+## Sau tag prereg-v2
 
 | Ngày | Thay đổi | Lý do | Ảnh hưởng |
 |------|----------|-------|-----------|

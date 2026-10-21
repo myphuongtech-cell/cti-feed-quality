@@ -1,14 +1,14 @@
 
 **Đề tài:** Chuẩn hóa IoC sang STIX/TAXII và đánh giá độ tin cậy của Threat Feed mở
 **Người thực hiện** Mỹ Phương (Fern)
-**Phiên bản:** v1 (tag `prereg-v1`)
+**Phiên bản:** v2 (tag `prereg-v2`), sửa đổi của bản gốc v1 (tag `prereg-v1`, commit `ff52514`)
 
-**Trạng thái dữ liệu khi cố định đề cương (nói rõ để trung thực):**
-- Bản nháp đầu viết ngày 2026-10-19, trước mọi lần tải dữ liệu.
-- Lần tải pilot duy nhất chạy lúc **2026-10-21 08:28 UTC** (8 feed). Sau lần tải này mình **chỉ kiểm tra cấu trúc** (số dòng, tiêu đề, ngày cập nhật của từng feed) và chỉnh đề cương theo đó. **Chưa có bất kỳ phân tích chất lượng nào** (độ chính xác, độ trùng, vòng đời) được tính trên dữ liệu.
-- Commit và tag `prereg-v1` được tạo **sau** lần tải pilot và **trước** khi bật thu thập liên tục. Các chỉnh sửa so với bản nháp đầu nằm trong `docs/DEVIATIONS.md`.
+**Trạng thái dữ liệu khi cố định đề cương:**
+- Bản gốc **v1** được commit lúc **2026-10-21 15:15 (+07), tức 08:15 UTC**, **trước** mọi lần tải dữ liệu. Xem lại bản gốc bằng lệnh: `git show prereg-v1:docs/PREREGISTRATION.md`.
+- Lần tải pilot duy nhất chạy lúc **2026-10-21 08:28 UTC** (8 feed), khoảng 13 phút sau commit v1. Sau lần tải này mình **chỉ kiểm tra cấu trúc** (số dòng, tiêu đề, ngày cập nhật của từng feed) và chỉnh đề cương theo đó. **Chưa có bất kỳ phân tích chất lượng nào** (độ chính xác, độ trùng, vòng đời) được tính trên dữ liệu.
+- Bản **v2** này là bản sửa đổi sau pilot, được tag **trước** khi bật thu thập liên tục. Mọi thay đổi so với v1 nằm trong `docs/DEVIATIONS.md` (mục "Sửa đổi từ v1 sang v2").
 
-> Quy tắc: mọi thay đổi sau tag `prereg-v1` phải ghi vào `docs/DEVIATIONS.md` kèm ngày và lý do. Không sửa file này sau khi đã tag.
+> Quy tắc: mọi thay đổi sau tag `prereg-v2` phải ghi vào `docs/DEVIATIONS.md` kèm ngày và lý do. Không sửa file này sau khi đã tag.
 
 ---
 

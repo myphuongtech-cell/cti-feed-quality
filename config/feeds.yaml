@@ -1,3 +1,4 @@
+# Danh sách 7 feed, cố định sau pilot 2026-10-21 (đã loại Feodo vì chỉ có 5 bản ghi, xem docs/DEVIATIONS.md).
 # Danh sách feed cố định TRƯỚC khi thu thập (xem docs/DECISIONS.md để biết lý do chọn).
 # operator: tổ chức vận hành. Khi kiểm tra "hai nguồn độc lập" (GT-2) phải đếm theo operator, không đếm theo feed.
 # min_interval_minutes: khoảng cách tối thiểu giữa hai lần tải (tôn trọng nhà cung cấp).
@@ -21,14 +22,6 @@ feeds:
     operator: abuse.ch
     url: https://threatfox.abuse.ch/export/csv/recent/
     ioc_types: [ip, domain, url, hash]
-    ext: csv
-    auth: abusech
-
-  - id: feodo
-    name: Feodo Tracker (botnet C2 IP)
-    operator: abuse.ch
-    url: https://feodotracker.abuse.ch/downloads/ipblocklist.csv
-    ioc_types: [ip]
     ext: csv
     auth: abusech
 

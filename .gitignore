@@ -9,3 +9,9 @@ data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+
+.vscode/
+logs/*
+!logs/.gitkeep
+data/manifest/state.json
+data/manifest/.collector.lock

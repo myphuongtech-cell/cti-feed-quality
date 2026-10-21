@@ -1,8 +1,5 @@
 # Chuẩn hóa IoC sang STIX/TAXII và đánh giá độ tin cậy của Threat Feed mở
 
-Tiểu luận môn **Thu thập và phân tích thông tin an ninh mạng** (020100117801 – 251541), Trường Đại học Gia Định.
-Hạn nộp: 2026-11-04.
-
 ## Mục tiêu
 1. Trích xuất IoC từ văn bản phi cấu trúc và chuẩn hóa sang STIX 2.1, chia sẻ qua TAXII 2.1.
 2. Đánh giá độ tin cậy của các Threat Feed mở theo 5 chiều (chính xác, kịp thời, độc nhất, ngữ cảnh, ổn định) và theo từng loại IoC.

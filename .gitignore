@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env
+.DS_Store
+# Dữ liệu thô và dữ liệu giấy phép hạn chế: không commit, chỉ commit manifest hash
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep

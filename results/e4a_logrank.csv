@@ -1,0 +1,5 @@
+within,compare,groups,n,test_statistic,p_value
+,ioc_type,"domain, hash, ip, url",39792,875.2989282137337,2.0172805901499307e-189
+hash,feed,"malwarebazaar, threatfox",6950,0.0,1.0
+ip,feed,"blocklist_de, cins, et_compromised, threatfox",24133,225.4082632465896,1.3600553011741274e-48
+url,feed,"openphish, threatfox, urlhaus",5538,970.805916301738,1.5565883494086512e-211

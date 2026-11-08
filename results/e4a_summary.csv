@@ -1,0 +1,15 @@
+ioc_type,n,events,censored,median_hours,median_note,S(6h),S(24h),S(72h),level,feed
+domain,3171,0,3171,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo loại IoC,
+hash,6950,0,6950,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo loại IoC,
+ip,24133,131,24002,1.0108333333333333,,,,,theo loại IoC,
+url,5538,241,5297,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo loại IoC,
+ip,16538,19,16519,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo feed và loại,blocklist_de
+ip,5933,112,5821,1.0108333333333333,,,,,theo feed và loại,cins
+ip,49,0,49,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo feed và loại,et_compromised
+hash,3698,0,3698,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo feed và loại,malwarebazaar
+url,1141,241,900,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo feed và loại,openphish
+domain,3171,0,3171,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo feed và loại,threatfox
+hash,3252,0,3252,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo feed và loại,threatfox
+ip,1613,0,1613,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo feed và loại,threatfox
+url,592,0,592,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo feed và loại,threatfox
+url,3805,0,3805,,trung vị chưa ước lượng được (quá nửa còn trong feed),,,,theo feed và loại,urlhaus

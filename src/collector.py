@@ -19,6 +19,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 import sys
 import time
 from datetime import datetime, timezone
@@ -99,10 +100,6 @@ def append_manifest(record: dict) -> None:
 def build_headers(feed: dict, st: dict, force: bool) -> dict:
     contact = os.getenv("CONTACT_EMAIL", "your-email@example.com")
     headers = {"User-Agent": f"student-cti-research/1.0 (academic project; contact: {contact})"}
-    if feed.get("auth") == "abusech":
-        key = os.getenv("ABUSECH_AUTH_KEY", "").strip()
-        if key:
-            headers["Auth-Key"] = key
     if not force:
         if st.get("etag"):
             headers["If-None-Match"] = st["etag"]
@@ -111,7 +108,34 @@ def build_headers(feed: dict, st: dict, force: bool) -> dict:
     return headers
 
 
-def fetch(feed: dict, defaults: dict, st: dict, session: requests.Session, force: bool) -> dict:
+def resolve_url(feed: dict) -> tuple[str | None, list[str], list[str]]:
+    """Thay {TEN_BIEN} trong URL bằng biến môi trường (ví dụ {ABUSECH_AUTH_KEY}).
+
+    Trả về (url đã thay hoặc None nếu thiếu biến, danh sách giá trị bí mật để che, danh sách biến còn thiếu).
+    Bản ghi manifest và log luôn dùng URL MẪU (không chứa khóa).
+    """
+    url = feed["url"]
+    secrets: list[str] = []
+    missing: list[str] = []
+    for name in re.findall(r"\{([A-Z0-9_]+)\}", url):
+        value = os.getenv(name, "").strip()
+        if value:
+            url = url.replace("{" + name + "}", value)
+            secrets.append(value)
+        else:
+            missing.append(name)
+    return (None if missing else url), secrets, missing
+
+
+def redact(text: str | None, secrets: list[str]) -> str | None:
+    if text is None:
+        return None
+    for secret in secrets:
+        text = text.replace(secret, "<KEY>")
+    return text
+
+
+def fetch(feed: dict, defaults: dict, st: dict, session: requests.Session, force: bool, url: str, secrets: list[str]) -> dict:
     retries = int(feed.get("retries", defaults.get("retries", 3)))
     timeout = (
         feed.get("timeout_connect_s", defaults.get("timeout_connect_s", 10)),
@@ -122,7 +146,7 @@ def fetch(feed: dict, defaults: dict, st: dict, session: requests.Session, force
     started = time.monotonic()
     for attempt in range(1, retries + 1):
         try:
-            resp = session.get(feed["url"], headers=headers, timeout=timeout)
+            resp = session.get(url, headers=headers, timeout=timeout)
             if resp.status_code == 429 or resp.status_code >= 500:
                 last_error = f"HTTP {resp.status_code}"
                 log.warning("%s: %s (lần %d/%d)", feed["id"], last_error, attempt, retries)
@@ -138,7 +162,7 @@ def fetch(feed: dict, defaults: dict, st: dict, session: requests.Session, force
                 "error": None,
             }
         except requests.RequestException as exc:
-            last_error = f"{type(exc).__name__}: {exc}"
+            last_error = redact(f"{type(exc).__name__}: {exc}", secrets)
             log.warning("%s: %s (lần %d/%d)", feed["id"], last_error, attempt, retries)
             time.sleep(2 ** attempt)
     return {
@@ -182,7 +206,22 @@ def process_feed(feed: dict, defaults: dict, state: dict, session: requests.Sess
         log.info("%s: chưa đến hạn, bỏ qua", fid)
         return
 
-    res = fetch(feed, defaults, st, session, force)
+    url, secrets, missing = resolve_url(feed)
+    if url is None:
+        ts = utcnow()
+        msg = "thiếu biến môi trường: " + ", ".join(missing) + " (điền trong file .env)"
+        log.error("%s: %s", fid, msg)
+        st["last_attempt_utc"] = iso(ts)
+        st["last_status"] = None
+        append_manifest({
+            "ts_utc": iso(ts), "feed": fid, "operator": feed.get("operator"), "url": feed["url"], "status": None,
+            "bytes": 0, "sha256": None, "stored": False, "unchanged": False, "path": None, "etag": None,
+            "last_modified": None, "attempts": 0, "elapsed_ms": 0, "error": msg,
+        })
+        save_state(state)
+        return
+
+    res = fetch(feed, defaults, st, session, force, url, secrets)
     ts = utcnow()
     record = {
         "ts_utc": iso(ts),
@@ -221,6 +260,10 @@ def process_feed(feed: dict, defaults: dict, state: dict, session: requests.Sess
         log.info("%s: 304 không đổi", fid)
     else:
         log.error("%s: thất bại, status=%s, lỗi=%s", fid, res["status"], res["error"])
+        if res["status"] in (401, 403):
+            log.error("%s: bị từ chối, kiểm tra khóa trong .env", fid)
+        if res["status"] in (404, 410):
+            log.error("%s: địa chỉ không còn tồn tại, kiểm tra lại URL trong config/feeds.yaml", fid)
 
     st["last_attempt_utc"] = iso(ts)
     st["last_status"] = res["status"]

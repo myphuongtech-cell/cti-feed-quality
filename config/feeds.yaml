@@ -2,6 +2,8 @@
 # Danh sách feed cố định TRƯỚC khi thu thập (xem docs/DECISIONS.md để biết lý do chọn).
 # operator: tổ chức vận hành. Khi kiểm tra "hai nguồn độc lập" (GT-2) phải đếm theo operator, không đếm theo feed.
 # min_interval_minutes: khoảng cách tối thiểu giữa hai lần tải (tôn trọng nhà cung cấp).
+# abuse.ch (URLhaus, ThreatFox, MalwareBazaar) từ 2026-10-22 bắt buộc Auth-Key nằm trong URL.
+# {ABUSECH_AUTH_KEY} được thay bằng biến trong file .env lúc chạy; khóa KHÔNG bao giờ được ghi vào manifest hay log.
 defaults:
   min_interval_minutes: 60
   timeout_connect_s: 10
@@ -12,26 +14,23 @@ feeds:
   - id: urlhaus
     name: URLhaus (recent)
     operator: abuse.ch
-    url: https://urlhaus.abuse.ch/downloads/csv_recent/
+    url: https://urlhaus-api.abuse.ch/v2/files/exports/{ABUSECH_AUTH_KEY}/recent.csv
     ioc_types: [url]
     ext: csv
-    auth: abusech
 
   - id: threatfox
     name: ThreatFox (recent IOCs)
     operator: abuse.ch
-    url: https://threatfox.abuse.ch/export/csv/recent/
+    url: https://threatfox-api.abuse.ch/v2/files/exports/{ABUSECH_AUTH_KEY}/recent.csv
     ioc_types: [ip, domain, url, hash]
     ext: csv
-    auth: abusech
 
   - id: malwarebazaar
     name: MalwareBazaar (recent hashes)
     operator: abuse.ch
-    url: https://bazaar.abuse.ch/export/csv/recent/
+    url: https://mb-api.abuse.ch/v2/files/exports/{ABUSECH_AUTH_KEY}/recent.csv
     ioc_types: [hash]
     ext: csv
-    auth: abusech
 
   - id: openphish
     name: OpenPhish (community feed)

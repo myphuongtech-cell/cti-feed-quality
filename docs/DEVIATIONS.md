@@ -17,5 +17,5 @@ Bản v1 (`prereg-v1`, commit `ff52514`, 08:15 UTC) có 8 feed và các định 
 ## Sau tag prereg-v2
 
 | Ngày | Thay đổi | Lý do | Ảnh hưởng |
-|------|----------|-------|-----------|
-| | | | |
+|2026-10-21 -> 2026-10-22|Không thu thập khoảng 22 giờ, cả 7 feed |Collector dừng sau lần tải pilot (cửa sổ terminal ngừng chạy)| IoC biến mất trong khoảng này không tính là sự kiện, xử lý như dữ liệu thiếu|
+|2026-10-22 |URLhaus, ThreatFox, MalwareBazaar trả HTTP 410; đổi sang địa chỉ API mới và dùng Authu-Key miễn phí |abuse.ch ngừng địa chỉ API cũ, bắt buộc xác thực | Ba feed này mất dữ liệu đến khi có khóa; chúng là danh sách 48 giờ gần nhất nên lần tải đầu có khóa sẽ bù phần nào (có thời gian nguồn), nhưng không phục hồi được lịch sử có mặt trong feed|

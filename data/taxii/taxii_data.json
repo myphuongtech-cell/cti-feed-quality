@@ -1,0 +1,36 @@
+{
+  "/discovery": {
+    "title": "CTI Feed Quality TAXII server (local)",
+    "description": "Server TAXII 2.1 c\u1ee5c b\u1ed9 cho ti\u1ec3u lu\u1eadn m\u00f4n Thu th\u1eadp v\u00e0 ph\u00e2n t\u00edch th\u00f4ng tin an ninh m\u1ea1ng",
+    "contact": "student",
+    "default": "http://127.0.0.1:5000/cti/",
+    "api_roots": [
+      "http://127.0.0.1:5000/cti/"
+    ]
+  },
+  "cti": {
+    "information": {
+      "title": "CTI Feed Quality",
+      "description": "IoC t\u1eeb feed m\u1edf, \u0111\u00e3 chu\u1ea9n h\u00f3a sang STIX 2.1",
+      "versions": [
+        "application/taxii+json;version=2.1"
+      ],
+      "max_content_length": 9765625
+    },
+    "status": [],
+    "collections": [
+      {
+        "id": "2d1cc6a4-4f3e-5e35-9f94-45988a550559",
+        "title": "IoC chu\u1ea9n h\u00f3a",
+        "description": "Indicator, Malware, Relationship t\u1eeb c\u00e1c feed \u0111\u00e3 thu th\u1eadp",
+        "can_read": true,
+        "can_write": true,
+        "media_types": [
+          "application/stix+json;version=2.1"
+        ],
+        "objects": [],
+        "manifest": []
+      }
+    ]
+  }
+}

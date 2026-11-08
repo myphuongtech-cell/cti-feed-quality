@@ -15,3 +15,6 @@ logs/*
 !logs/.gitkeep
 data/manifest/state.json
 data/manifest/.collector.lock
+
+data/e1/texts/
+data/e1/fetch_log.csv

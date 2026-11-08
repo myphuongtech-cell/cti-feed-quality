@@ -1,0 +1,13 @@
+{
+  "backend": {
+    "module": "medallion.backends.memory_backend",
+    "module_class": "MemoryBackend",
+    "filename": "C:\\Users\\scarlet\\Documents\\OKI\\cti-feed-quality\\data\\taxii\\taxii_data.json"
+  },
+  "users": {
+    "admin": "admin"
+  },
+  "taxii": {
+    "max_page_size": 1000
+  }
+}

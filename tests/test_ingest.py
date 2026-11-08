@@ -85,3 +85,22 @@ def test_build_checks_skips_unchanged_before_first_snapshot():
     ]
     checks, snaps = build_checks(rows)
     assert len(checks) == 1 and snaps[0]["a"] == 0
+
+
+def test_ioc_present_at_start_of_each_continuous_run_is_flagged(tmp_path):
+    plan = [
+        (0, 200, ["1.1.1.1"]), (1, 304, None),
+        (30, 200, ["1.1.1.1", "2.2.2.2"]),     # sau khoảng trống: 2.2.2.2 có thể đã xuất hiện trong lúc không quan sát
+        (31, 200, ["1.1.1.1", "2.2.2.2", "3.3.3.3"]),
+    ]
+    ioc, _ = build_all(make_root(tmp_path, plan))
+    assert bool(row(ioc, "2.2.2.2")["present_in_first_snapshot"]) is True
+    assert bool(row(ioc, "3.3.3.3")["present_in_first_snapshot"]) is False
+
+
+def test_window_filters_manifest(tmp_path):
+    plan = [(0, 200, ["1.1.1.1"]), (1, 200, ["1.1.1.1", "2.2.2.2"]), (2, 200, ["1.1.1.1", "2.2.2.2", "3.3.3.3"])]
+    root = make_root(tmp_path, plan)
+    until = iso(T0 + timedelta(hours=1, minutes=30))
+    ioc, _ = build_all(root, until=until)
+    assert set(ioc["ioc_value"]) == {"1.1.1.1", "2.2.2.2"}

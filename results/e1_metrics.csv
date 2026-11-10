@@ -1,0 +1,11 @@
+system,type,precision,recall,f1
+baseline,ip,0.0,0.0,0.0
+baseline,domain,0.0,0.0,0.0
+baseline,url,,0.0,0.0
+baseline,hash,1.0,1.0,1.0
+baseline,MACRO,,,0.25
+pipeline,ip,1.0,1.0,1.0
+pipeline,domain,1.0,0.6666666666666666,0.8
+pipeline,url,1.0,1.0,1.0
+pipeline,hash,1.0,1.0,1.0
+pipeline,MACRO,,,0.95
